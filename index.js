@@ -23,16 +23,16 @@ app.use(bodyParser.json())
 // index page
 app.get('/', function (req, res) {
   res.send('hello world i am a chat bot')
-})
+});
 
 // for facebook to verify
 app.get('/webhooks', function (req, res) {
   console.log(process.env.FB_VERIFY_TOKEN)
-  if (req.query['hub.verify_token'] === process.env.FB_VERIFY_TOKEN) {
+  if (req.query['hub.verify_token'] === 'just_do_it') {
     res.send(req.query['hub.challenge'])
   }
   res.send('Error, wrong token')
-})
+});
 
 // to send messages to facebook
 app.post('/webhooks', function (req, res) {
