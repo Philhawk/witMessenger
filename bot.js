@@ -41,8 +41,11 @@ var read = function (sender, message, reply) {
 		var sessionId = findOrCreateSession(sender)
 		// Let's forward the message to the Wit.ai bot engine
 		// This will run all actions until there are no more actions left to do
+    console.log(message)
+    console.log(sessionId)
+    console.log(sessions)
 		wit.runActions(
-			sessionId, // the user's current session by id
+			sessionId, // the user's current session by id'
 			message,  // the user's message
 			sessions[sessionId].context, // the user's session state
 			function (error, context) { // callback
