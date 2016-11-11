@@ -26,12 +26,14 @@ app.get('/', function (req, res) {
 });
 
 // for facebook to verify
-if (req.query['hub.verify_token'] === 'please_work') {
-      res.send(req.query['hub.challenge']);
-  } else {
-      res.send('Your token does not match');
+app.get('/webhooks', function (req, res) {
+  console.log(req.query)
+  if (req.query['hub.verify_token'] === 'please_work') {
+    res.send(req.query['hub.challenge']);
   }
+  res.send('Try Again');
 });
+
 
 // to send messages to facebook
 app.post('/webhooks', function (req, res) {
