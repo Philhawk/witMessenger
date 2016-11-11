@@ -29,9 +29,10 @@ app.get('/', function (req, res) {
 app.get('/webhooks', function (req, res) {
   console.log(req.query)
   if (req.query['hub.verify_token'] === 'please_work') {
-    res.send(req.query['hub.challenge']);
-  }
+    res.send(req.query['hub.challenge']); 
+  } else {
   res.send('Try Again');
+  }
 });
 
 
