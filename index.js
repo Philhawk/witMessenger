@@ -17,8 +17,8 @@ app.listen(app.get('port'), function () {
   console.log('Running on port', app.get('port'))
 })
 // PARSE THE BODY
-app.use(bodyParser.json())
-
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 // index page
 app.get('/', function (req, res) {
@@ -26,14 +26,12 @@ app.get('/', function (req, res) {
 });
 
 // for facebook to verify
-app.get('/webhooks', function (req, res) {
-  console.log(req.query)
-  if (req.query['hub.verify_token'] === 'please_work') {
-    res.send(req.query['hub.challenge']);
+if (req.query['hub.verify_token'] === 'please_work') {
+      res.send(req.query['hub.challenge']);
+  } else {
+      res.send('Your token does not match');
   }
-  res.send('Try Again');
 });
-
 
 // to send messages to facebook
 app.post('/webhooks', function (req, res) {
